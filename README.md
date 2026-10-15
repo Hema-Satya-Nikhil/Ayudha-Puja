@@ -84,25 +84,25 @@ The script uses OpenCV edge detection to create the transparent warm-ink outline
 - `.gitignore` — ignores Python caches, OS files, editor files
 - `deploy-to-github.bat` — Windows helper for pushing to GitHub
 - `LICENSE` — MIT license
-- `.github/workflows/pages.yml` — automatic GitHub Pages deployment on push to `main`
 
-## Deploy to GitHub
+## Deploy to GitHub Pages
 
-The repository is already initialized with Git. To share it on GitHub and deploy live:
+The repository is initialized with Git on the `main` branch. To publish your site:
 
-1. Create a new public repository on [github.com/new](https://github.com/new)
+1. Create a new public repository on [github.com](https://github.com/new) named `Ayudha-Puja`.
 2. Add the remote and push:
 
    ```bash
-   git remote add origin https://github.com/USERNAME/REPO-NAME.git
-   git branch -M main
+   git remote add origin https://github.com/Hema-Satya-Nikhil/Ayudha-Puja.git
    git push -u origin main
    ```
 
-3. GitHub Pages will deploy automatically via the workflow in `.github/workflows/pages.yml`. Your site will be live at `https://USERNAME.github.io/REPO-NAME/`.
-4. Double-check on GitHub: go to **Settings → Pages** and verify the source is set to **GitHub Actions**.
+3. Go to **Settings → Pages** in your GitHub repo.
+4. Under **Source**, select **Deploy from a branch** → **main** → **/ (root)**.
+5. Click **Save**. Your site will be live at `https://Hema-Satya-Nikhil.github.io/Ayudha-Puja/` (takes ~1 minute to deploy).
+6. Visit that URL in a browser and press **F11** for full-screen projector mode.
 
-A helper script `deploy-to-github.bat` is included for Windows that guides you through the process.
+A helper script `deploy-to-github.bat` is included for Windows that automates the remote setup and push.
 
 ---
 
