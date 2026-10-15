@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Server / logs
+*.log
+server.log
+
+# Keep assets and built files
+!assets/
+
+# Exclude large intermediate files that can be regenerated
+# (drawings and paths are committed, but Python caches are not)

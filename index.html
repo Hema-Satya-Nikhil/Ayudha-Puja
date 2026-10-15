@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3B0715">
+  <meta name="description" content="A devotional Ayudha Puja showcase by the Department of CSE and AIML, Srinivasa Institute of Engineering and Technology.">
+  <title>Ayudha Puja Celebrations | SIET CSE &amp; AIML</title>
+
+  <!-- Critical asset preloads -->
+  <link rel="preload" as="image" href="assets/siet-logo.png">
+  <link rel="preload" as="image" href="assets/durga-maa.png">
+  <link rel="preload" as="image" href="assets/official-poster.png">
+  <link rel="preload" as="script" href="assets/drawing-paths.js">
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="assets/drawing-paths.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- ================================================================ -->
+  <!-- Background atmosphere layers                                      -->
+  <!-- ================================================================ -->
+  <div class="ambient-wash" aria-hidden="true"></div>
+  <canvas id="petalCanvas" aria-hidden="true"></canvas>
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- ================================================================ -->
+  <!-- Velvet curtains -- opened by the ceremony start button            -->
+  <!-- ================================================================ -->
+  <div class="curtain-stage" id="curtainStage" aria-hidden="true">
+    <div class="curtain-panel curtain-left"></div>
+    <div class="curtain-panel curtain-right"></div>
+    <div class="curtain-valance"></div>
+    <div class="curtain-tieback tieback-left"></div>
+    <div class="curtain-tieback tieback-right"></div>
+    <div class="curtain-center-glow"></div>
+    <div class="curtain-sparkle"></div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- Intro overlay -- shown until the visitor opens the curtains       -->
+  <!-- ================================================================ -->
+  <div class="intro-overlay" id="introOverlay">
+    <img class="intro-logo" src="assets/siet-logo.png" alt="Srinivasa Institute of Engineering and Technology">
+    <p class="intro-subtitle">AYUDHA PUJA CELEBRATIONS</p>
+    <p class="intro-philosophy">KNOWLEDGE &#183; INNOVATION &#183; EXCELLENCE</p>
+    <p class="intro-event-line">
+      <span>16 OCTOBER 2026</span>
+      <span aria-hidden="true">|</span>
+      <span>10:00 AM ONWARDS</span>
+      <span aria-hidden="true">|</span>
+      <span>CCC LAB</span>
+    </p>
+    <button class="primary-button intro-button" id="startExperience" type="button">
+      Open the curtains
+    </button>
+    <p class="sound-note">Click to begin the ceremony reveal and start the soundtrack.</p>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- Topbar -- college identity and global controls                    -->
+  <!-- ================================================================ -->
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="SIET CSE and AIML Ayudha Puja home">
+      <img class="brand-logo" src="assets/siet-logo.png" alt="Srinivasa Institute of Engineering and Technology">
+      <span class="brand-copy"><small>DEPARTMENT OF CSE &amp; AIML</small></span>
+    </a>
+    <div class="topbar-right">
+      <span class="live-dot" aria-hidden="true"></span>
+      <button class="control-pill sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Toggle devotional music on or off">
+        <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span id="soundLabel">MUSIC OFF</span>
+      </button>
+      <button class="control-pill loop-toggle" id="autoLoopToggle" type="button" aria-pressed="false" aria-label="Toggle automatic ceremony loop">
+        <span class="loop-symbol" aria-hidden="true">&#8635;</span>
+        <span id="loopLabel">AUTO LOOP OFF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================================================================ -->
+  <!-- Main experience -- copy panel, art stage, poster                  -->
+  <!-- ================================================================ -->
+  <main id="top" class="experience" aria-label="Ayudha Puja celebration">
+    <section class="hero-grid">
+
+      <!-- Copy panel -->
+      <div class="copy-panel">
+        <p class="eyebrow"><span></span> DEVOTION &#183; WISDOM &#183; INNOVATION</p>
+        <h2 class="hero-title"><span>AYUDHA</span><em>PUJA</em></h2>
+        <div class="gold-rule"><span>&#9733;</span></div>
+        <p class="hero-lead">
+          Honouring the goddess who grants wisdom, the tools that shape creation,
+          and the spirit that drives innovation.
+        </p>
+
+        <div class="college-block">
+          <span class="college-overline">PROUDLY PRESENTED BY</span>
+          <h3>SRINIVASA INSTITUTE OF<br>ENGINEERING AND TECHNOLOGY</h3>
+          <p>Department of Computer Science &amp; Engineering<br><strong>and Artificial Intelligence &amp; Machine Learning</strong></p>
+        </div>
+
+        <div class="event-chip-row" aria-label="Event details">
+          <span>FRIDAY &#183; 16 OCT 2026</span>
+          <span>10:00 AM ONWARDS</span>
+          <span>CCC LAB</span>
+        </div>
+
+        <div class="actions-row">
+          <button class="primary-button" id="posterButton" type="button">View invitation</button>
+          <button class="text-button" id="replayButton" type="button">Redraw Maa</button>
+          <button class="text-button" id="resetButton" type="button">Reset</button>
+        </div>
+
+        <p class="blessing-line">May every effort become meaningful creation.</p>
+      </div>
+
+      <!-- Art stage -->
+      <div class="art-stage" id="artStage" aria-label="A line-art drawing of Goddess Durga with her lion">
+        <div class="stage-aura" aria-hidden="true"></div>
+        <div class="mandala mandala-one" aria-hidden="true"></div>
+        <div class="mandala mandala-two" aria-hidden="true"></div>
+         <div class="stage-floor" aria-hidden="true"></div>
+
+         <!-- Chakra wheel — rotates behind the goddess -->
+         <div class="chakra-wheel" aria-hidden="true">
+           <svg class="chakra-svg" viewBox="0 0 200 200" role="img" aria-label="Rotating celestial chakra">
+             <radialGradient id="chakraGrad" cx="50%" cy="40%" r="70%">
+               <stop offset="0%" stop-color="#fff7e6"/>
+               <stop offset="100%" stop-color="#D4AF37"/>
+             </radialGradient>
+             <circle cx="100" cy="100" r="8" fill="url(#chakraGrad)" />
+             <g stroke="url(#chakraGrad)" stroke-width="2" stroke-linecap="round">
+               <line x1="100" y1="18"  x2="100" y2="182"/>
+               <line x1="18"  y1="100" x2="182" y2="100"/>
+               <line x1="44"  y1="44"  x2="156" y2="156"/>
+               <line x1="44"  y1="156" x2="156" y2="44"/>
+               <line x1="100" y1="18"  x2="163" y2="100"/>
+               <line x1="37"  y1="100" x2="100" y2="163"/>
+               <line x1="100" y1="163" x2="37"  y2="100"/>
+               <line x1="100" y1="18"  x2="163" y2="100"/>
+             </g>
+             <circle cx="100" cy="100" r="78" fill="none" stroke="url(#chakraGrad)" stroke-width="1" opacity="0.15"/>
+             <circle cx="100" cy="100" r="52" fill="none" stroke="#D4AF63" stroke-width="1" opacity="0.10"/>
+           </svg>
+         </div>
+
+         <!-- Oil lamps — glowing diyas below the goddess -->
+         <svg class="oil-lamp-defs" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+           <radialGradient id="flameGrad" cx="50%" cy="35%" r="60%">
+             <stop offset="0%" stop-color="#fff9d6"/>
+             <stop offset="60%" stop-color="#ffc107"/>
+             <stop offset="100%" stop-color="#ff6f00"/>
+           </radialGradient>
+         </svg>
+         <div class="oil-lamps" aria-hidden="true">
+          <svg class="oil-lamp" viewBox="0 0 60 70" role="img" aria-label="Oil lamp">
+              <path d="M30 58 Q42 54 38 42 Q34 38 30 43 Q26 38 22 42 Q18 54 30 58 Z"
+                    fill="#8B4513" stroke="#5D2906" stroke-width="1"/>
+              <ellipse cx="30" cy="42" rx="10" ry="3" fill="#A0522D" opacity="0.9"/>
+              <path d="M27 40 L33 40" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+              <path class="lamp-flame" d="M30 36 Q34 30 30 24 Q26 30 30 36 Z" fill="url(#flameGrad)"/>
+              <ellipse cx="30" cy="24" rx="3" ry="1.5" fill="#fff9d6" class="lamp-spark"/>
+            </svg>
+           <svg class="oil-lamp" viewBox="0 0 60 70" role="img" aria-label="Oil lamp">
+             <path d="M30 58 Q42 54 38 42 Q34 38 30 43 Q26 38 22 42 Q18 54 30 58 Z"
+                   fill="#8B4513" stroke="#5D2906" stroke-width="1"/>
+             <ellipse cx="30" cy="42" rx="10" ry="3" fill="#A0522D" opacity="0.9"/>
+             <path d="M27 40 L33 40" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+             <path class="lamp-flame" d="M30 36 Q34 30 30 24 Q26 30 30 36 Z" fill="url(#flameGrad)"/>
+             <ellipse cx="30" cy="24" rx="3" ry="1.5" fill="#fff9d6" class="lamp-spark"/>
+           </svg>
+           <svg class="oil-lamp" viewBox="0 0 60 70" role="img" aria-label="Oil lamp">
+             <path d="M30 58 Q42 54 38 42 Q34 38 30 43 Q26 38 22 42 Q18 54 30 58 Z"
+                   fill="#8B4513" stroke="#5D2906" stroke-width="1"/>
+             <ellipse cx="30" cy="42" rx="10" ry="3" fill="#A0522D" opacity="0.9"/>
+             <path d="M27 40 L33 40" stroke="#000" stroke-width="1" stroke-linecap="round"/>
+             <path class="lamp-flame" d="M30 36 Q34 30 30 24 Q26 30 30 36 Z" fill="url(#flameGrad)"/>
+             <ellipse cx="30" cy="24" rx="3" ry="1.5" fill="#fff9d6" class="lamp-spark"/>
+           </svg>
+         </div>
+
+         <div class="drawing-composition" id="drawingComposition">
+          <img class="durga-art durga-colour" id="durgaArt"
+               src="assets/durga-maa.png"
+               alt="Goddess Durga with multiple arms and her lion, in red, ivory and gold."
+               draggable="false">
+          <svg class="durga-drawing" id="durgaDrawing"
+               viewBox="0 0 1199 1312" aria-hidden="true"></svg>
+          <img class="durga-art durga-sketch" id="durgaSketch"
+               src="assets/durga-sketch.png"
+               alt="Outline of Goddess Durga for reduced-motion fallback."
+               draggable="false">
+        </div>
+        <div class="art-caption"><span>DIVINE STRENGTH &#183; FEARLESS WISDOM</span></div>
+        <div class="stage-flower stage-flower-left" aria-hidden="true">&#9535;</div>
+        <div class="stage-flower stage-flower-right" aria-hidden="true">&#9535;</div>
+      </div>
+
+      <!-- Poster side -->
+      <aside class="poster-side" id="posterSide" aria-label="Official Ayudha Puja invitation">
+        <div class="side-kicker"><span>01</span> THE CELEBRATION</div>
+        <button class="poster-preview" id="posterPreview" type="button" aria-label="Open the official Ayudha Puja invitation poster">
+          <span class="poster-preview-frame">
+            <img src="assets/official-poster.png"
+                 alt="Official SIET Ayudha Puja Celebrations invitation poster for the Department of CSE and AIML"
+                 loading="eager">
+          </span>
+          <span class="poster-preview-label">OFFICIAL INVITATION <span aria-hidden="true">&#8599;</span></span>
+        </button>
+        <p class="poster-side-copy">Tradition inspires us.<br>Technology carries us forward.</p>
+        <div class="side-divider"><span>&#10052;</span></div>
+        <p class="department-tag">CSE <span>&amp;</span> AIML</p>
+        <a class="download-link" href="assets/official-poster.png"
+           download="SIET-Ayudha-Puja-Official-Invitation.png">Download invitation <span aria-hidden="true">&#8595;</span></a>
+      </aside>
+    </section>
+
+    <!-- Bottom rail -->
+    <footer class="bottom-rail">
+      <div class="rail-phrase"><span>Om</span> WISDOM IN EVERY TOOL</div>
+      <div class="rail-center"><span></span> AUSPICIOUS BEGINNINGS <span></span></div>
+      <div class="rail-phrase rail-right">CREATE WITH PURPOSE <span>&#9733;</span></div>
+    </footer>
+  </main>
+
+  <!-- ================================================================ -->
+  <!-- Suspended ceremonial bell -- premium 3D gold temple bell           -->
+  <!-- ================================================================ -->
+  <button class="bell-float" id="bellButton" type="button"
+          aria-label="Ring the ceremonial bell" title="Ring the ceremonial bell">
+    <svg class="bell-svg" viewBox="0 0 80 250" role="img" aria-hidden="true">
+      <defs>
+        <radialGradient id="bellBodyGrad" cx="50%" cy="32%" r="65%" fx="50%" fy="25%">
+          <stop offset="0%"  stop-color="#fff7e6"/>
+          <stop offset="22%" stop-color="#f0df90"/>
+          <stop offset="48%" stop-color="#e6c66a"/>
+          <stop offset="72%" stop-color="#c99d33"/>
+          <stop offset="88%" stop-color="#a67820"/>
+          <stop offset="100%" stop-color="#7a4e10"/>
+        </radialGradient>
+        <radialGradient id="rimGrad" cx="50%" cy="25%" r="50%" fx="50%" fy="15%">
+          <stop offset="0%" stop-color="#fffce0"/>
+          <stop offset="100%" stop-color="#e6c66a"/>
+        </radialGradient>
+        <linearGradient id="chainGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#f9f0b8"/>
+          <stop offset="52%" stop-color="#d9b360"/>
+          <stop offset="100%" stop-color="#b88a20"/>
+        </linearGradient>
+        <radialGradient id="clapperGrad" cx="40%" cy="40%" r="60%" fx="40%" fy="35%">
+          <stop offset="0%" stop-color="#f0e6b0"/>
+          <stop offset="100%" stop-color="#8a5a1a"/>
+        </radialGradient>
+        <radialGradient id="clapperHlGrad" cx="30%" cy="30%" r="65%" fx="30%" fy="25%">
+          <stop offset="0%" stop-color="#fff9e8"/>
+          <stop offset="100%" stop-color="#f0e6b0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Chain links (curved, linking) -->
+      <g stroke="url(#chainGrad)" stroke-width="5" fill="none" stroke-linecap="round">
+        <path d="M40 12 C44 17 44 23 40 28"/>
+        <path d="M40 28 C44 33 44 39 40 44"/>
+        <path d="M40 44 C44 49 44 55 40 60"/>
+        <path d="M40 60 C44 65 44 71 40 76"/>
+        <path d="M40 76 C44 81 44 87 40 92"/>
+      </g>
+
+      <!-- Mounting bracket (ornate C-shaped arch) -->
+      <path d="M28 92 L28 100 C26 100 24 102 24 105 C24 108 26 110 28 110 L52 110 C53.5 110 55 108.5 55 106.5 C55 104.5 53.5 102.5 52 102.5 L52 100 L50 100 L50 92 Z"
+            fill="url(#rimGrad)" stroke="#b88a20" stroke-width="1.5"/>
+      <circle cx="25" cy="105" r="2.5" fill="#f0df90"/>
+      <circle cx="55" cy="105" r="2.5" fill="#f0df90"/>
+      <circle cx="40" cy="92" r="3" fill="#f0df90"/>
+
+      <!-- Bell body + everything that swings together -->
+      <g class="bell-swing" transform-origin="40px 92px">
+        <!-- Bell body (flared cone) -->
+        <path d="M24 110 Q16 132 20 168 Q24 201 40 216 Q56 201 60 168 Q64 132 56 110 Z"
+              fill="url(#bellBodyGrad)" stroke="#7a4e10" stroke-width="2"/>
+
+        <!-- Rim decorative bands -->
+        <ellipse cx="40" cy="126" rx="15" ry="2.5" fill="#b88a20" opacity="0.7"/>
+        <path d="M30 135 Q40 138 50 135" fill="none" stroke="#b88a20" stroke-width="1.5" opacity="0.4"/>
+        <ellipse cx="40" cy="176" rx="18" ry="2.5" fill="#b88a20" opacity="0.6"/>
+
+        <!-- Bell body highlight -->
+        <path d="M30 122 Q40 129 50 122" fill="none" stroke="#fffbf0" stroke-width="2" opacity="0.5"/>
+        <path d="M31 140 Q40 145 49 140" fill="none" stroke="#fffbf0" stroke-width="1.5" opacity="0.4"/>
+
+        <!-- Clapper string -->
+        <line x1="40" y1="110" x2="40" y2="144" stroke="#a67820" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+
+      <!-- Clapper (swings independently with delay) -->
+      <g class="bell-clapper" transform-origin="40px 110px">
+        <ellipse cx="40" cy="145" rx="6" ry="4" fill="url(#clapperGrad)" stroke="#7a4e10" stroke-width="1"/>
+        <ellipse cx="40" cy="145" rx="6" ry="4" fill="url(#clapperHlGrad)" stroke="none" opacity="0.55"/>
+      </g>
+
+      <!-- Drop shadow (fixed, does not swing) -->
+      <ellipse cx="40" cy="223" rx="22" ry="5" fill="#000" opacity="0.25"/>
+    </svg>
+    <div class="bell-float-glow" aria-hidden="true"></div>
+    <span class="bell-label">RING MA MA</span>
+  </button>
+
+  <!-- ================================================================ -->
+  <!-- Poster modal                                                      -->
+  <!-- ================================================================ -->
+  <div class="poster-modal" id="posterModal" role="dialog" aria-modal="true"
+       aria-labelledby="modalTitle" aria-hidden="true">
+    <button class="modal-backdrop" id="modalBackdrop" type="button" aria-label="Close poster"></button>
+    <section class="modal-card">
+      <button class="modal-close" id="closeModal" type="button" aria-label="Close poster">&#215;</button>
+      <div class="modal-poster-image">
+        <img src="assets/official-poster.png"
+             alt="Full official SIET Ayudha Puja invitation poster">
+      </div>
+      <div class="modal-copy">
+        <p class="eyebrow"><span></span> SIET &#183; CSE &amp; AIML</p>
+        <h2 id="modalTitle">A tradition of purpose.</h2>
+        <p>Celebrating Ayudha Puja with gratitude for the instruments, ideas and people that help us build a better tomorrow.</p>
+        <a class="primary-button download-poster"
+           href="assets/official-poster.png"
+           download="SIET-Ayudha-Puja-Official-Invitation.png">Download invitation <span aria-hidden="true">&#8595;</span></a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- Audio                                                             -->
+  <!-- The MP3 must be placed at assets/durga-devotional.mp3             -->
+  <!-- ================================================================ -->
+  <audio id="devotionalTrack" loop preload="none"></audio>
+
+  <noscript>
+    <p class="noscript-note">
+      Please enable JavaScript to experience the animated reveal, flower effects
+      and sound controls.
+    </p>
+  </noscript>
+</body>
+</html>

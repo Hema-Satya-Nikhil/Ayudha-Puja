@@ -1,0 +1,10 @@
+OPTIONAL DEVOTIONAL AUDIO
+
+To use a Durga Maa devotional song with this website:
+1. Copy an MP3 recording that you have permission to play into this folder.
+2. Rename the file exactly: durga-devotional.mp3
+3. Keep it beside durga-maa.png, durga-sketch.png, siet-logo.png and official-poster.png.
+4. Reload the website and click Open the curtains or MUSIC OFF.
+
+If this file is not present, the website uses its built-in original ambient sound instead.
+The site does not download or bundle a copyrighted devotional recording.
