@@ -81,8 +81,31 @@ The script uses OpenCV edge detection to create the transparent warm-ink outline
 - `generate_poster.py` — the original alternate Python poster generator
 - `copy_mp3.bat` — re-copy the devotional MP3 into assets
 - `Start-Showcase.bat` — Windows launcher
+- `.gitignore` — ignores Python caches, OS files, editor files
+- `deploy-to-github.bat` — Windows helper for pushing to GitHub
+- `LICENSE` — MIT license
+- `.github/workflows/pages.yml` — automatic GitHub Pages deployment on push to `main`
 
-## Before the event
+## Deploy to GitHub
+
+The repository is already initialized with Git. To share it on GitHub and deploy live:
+
+1. Create a new public repository on [github.com/new](https://github.com/new)
+2. Add the remote and push:
+
+   ```bash
+   git remote add origin https://github.com/USERNAME/REPO-NAME.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+3. GitHub Pages will deploy automatically via the workflow in `.github/workflows/pages.yml`. Your site will be live at `https://USERNAME.github.io/REPO-NAME/`.
+4. Double-check on GitHub: go to **Settings → Pages** and verify the source is set to **GitHub Actions**.
+
+A helper script `deploy-to-github.bat` is included for Windows that guides you through the process.
+
+---
+
 
 - Run the site on the actual laptop and projector before the audience arrives.
 - Press **F11**, use 100% browser zoom, and select 1920×1080 when the projector supports it.
